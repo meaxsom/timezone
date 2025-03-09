@@ -1,0 +1,57 @@
+# Binaries
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+
+# Project files
+*.suo
+*.user
+
+# IDE files
+.vs/
+.vscode/
+
+# NuGet
+packages/
+*.nupkg
+*.nuget.targets
+
+# Test files
+TestResults/
+*.testsettings
+
+# Build artifacts
+**/bin/
+**/obj/
+**/*.exe
+**/*.dll
+**/*.pdb
+
+# Logs
+*.log
+*.tmp
+*.temp
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/tasks.json
+
+# Docker
+Dockerfile*
+.dockerignore
+*.dockerignore
+
+# Other
+*.cache
+*.DS_Store
+Thumbs.db
+ehthumbs.db
