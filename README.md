@@ -2,14 +2,14 @@
 
 A command line implementation of [Coding Challenge #85](https://codingchallenges.substack.com/p/coding-challenge-85-time-zone-converter)
 
-Using this as a vehicle to understand the C# language, ecosystem, guidelines; the .Net framework; VS Code as the IDE for a C# project; and using an AI assistant ([Phind](https://www.phind.com)) - as opposed to Google'ing - to answer questions/find solutions.
+Using this as a vehicle to understand the C# language, its ecosystem, and coding guidelines; the .Net framework; VS Code as the IDE for a C# project; and using an AI assistant ([Phind](https://www.phind.com)) - as opposed to Google'ing - to answer questions/find solutions.
 
 ## Activity
 
 ### Day 1
 
 #### Step 0
-Used an premade Dev container for C#/.Net development. Reasonbally easy to set up. Rather than setting up a dev container for each C# project, I'll use a single container and just have different repos for the project.
+Used a premade Dev container for C#/.Net development. Reasonbally easy to set up. Rather than setting up a dev container for each C# project, I'll use a single container and just have different repos for the project.
 
 Spent some time asking Phind about structuring C# projects, the difference/relationship between a "project" and a "solution", what VS code extensions to use/install, how to have VS code create a projects from a template, how to add in unit testing, and how `NuGet` packages are installed/dependencies created.
 
@@ -31,6 +31,16 @@ Still on step 1. Since I can't set up tests yet, I opted to use the debugger to 
 Still want add testing but I think I can move on. Also probably should add this to GitHub. Asked Phind to generate a typical `.gitignore` file for C# projects. 
 
 #### Step 2
+
+Created a couple more structs to handle keeping track of selected zones and which one is the selected/default zone and loaded up the default and additional timezones from the command line argumnet into the tracking list.
+
+Had to ask Phind about `nullable` type and how to "unwrap" them. Same/similar concept to "optionals" in Swift. For some reason it was more understandable here.
+
+Create an inital sort of the list base on timeazone name
+
+## Notes
+
+I'm noticing that I have 2 `.vscode` directories - one at the top level of my workspace and one w/in the project. I think VS Code is using the one at the top level instead of the one w/in the project. Wonder how I get it to use the one in the project?
 
 
 ## Resources

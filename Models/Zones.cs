@@ -11,15 +11,22 @@ public readonly struct Zones
         {
         }
 
-    public Zones(String inZoneFile)
+    public Zones(String? inZoneFile)
         {
         if (inZoneFile != null)
             Populate(inZoneFile);
         }
 
-    public readonly Zone GetZone(String inZoneName)
+    public readonly Zone? GetZone(String? inZoneName)
         {
-        return zones[inZoneName];
+        Zone? result=null;
+        if (inZoneName != null)
+            {
+            if (zones.TryGetValue(inZoneName, out Zone value))
+                result=value;
+            }
+            
+        return result;
         }
 
     private void Populate(String inZoneFilePath)

@@ -1,7 +1,7 @@
 namespace timezone.Models;
 
 public readonly struct Zone
-{
+    {
     public String Name {get; }
     public int Offset {get; }
     public int DSTOffset {get; }

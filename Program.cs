@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using Spectre.Console;
 using Spectre.Console.Cli;
@@ -31,17 +32,46 @@ internal sealed class Timezoned : Command<Timezoned.Settings>
         [CommandOption("-d|--sort-direction")]
         public string? SortDirection { get; init; }
         }
-        
+    
     public override int Execute([NotNull] CommandContext context, [NotNull] Settings settings)
         {
         DateTime utcNow = DateTime.UtcNow;
 
         var sourceZone = settings.SourceTimezone;
-        var otherZones = settings.OtherZones;
 
         var theTimezones = new Zones(settings.TimeZoneCSVFile);
-        
-        Console.WriteLine("Hello World2");
+        var theSelectedZones = new SelectedZones();
+
+        var theDefaultZone=theTimezones.GetZone(settings.SourceTimezone);
+        if (theDefaultZone != null)
+            {
+            // load up the default timezone
+            theSelectedZones.AddZone(theDefaultZone, true);
+            Console.WriteLine($"Added default Timezone: {theDefaultZone.Value.Name}\t{theDefaultZone.Value.Offset}");
+
+            var theOtherZones = settings.OtherZones;
+            // use LINQ - adapted from Phind answer about parsing strings
+            IEnumerable<String> theZoneNames = theOtherZones.Split(",").Select(s => s.Trim()).Where(s => !string.IsNullOrWhiteSpace(s));
+ 
+            // load up other zones
+            foreach (var theZoneName in theZoneNames)
+                {
+                var theZone=theTimezones.GetZone(theZoneName);
+                if (theZone != null)
+                    {
+                    theSelectedZones.AddZone(theZone, false);
+                    Console.WriteLine($"Added Timezone: {theZone.Value.Name}\t{theZone.Value.Offset}");
+                    }
+                }
+
+            // sort
+            theSelectedZones.Zones.Sort((a, b) => string.Compare(a.Timezone.Name, b.Timezone.Name, StringComparison.OrdinalIgnoreCase));
+            
+            foreach (var theZone in theSelectedZones.Zones)
+                Console.WriteLine($"Timezone: {theZone.Timezone.Name}\t{theZone.Timezone.Offset}");
+            }
+        else
+            Console.WriteLine("Default Timezone not found");
 
         /*
         var searchOptions = new EnumerationOptions
